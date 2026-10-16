@@ -108,6 +108,12 @@
     @media(max-width:900px){.contact-options.contact-with-form{grid-template-columns:1fr}.contact-sidebar{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
     @media(max-width:760px){.contact-sidebar{grid-template-columns:1fr}}
     @media(max-width:600px){.contact-sidebar{grid-template-columns:1fr;gap:18px}.inquiry-form{padding:26px 20px;border-radius:20px}.inquiry-fields{grid-template-columns:1fr;gap:22px}.inquiry-header .eyebrow{font-size:8px;letter-spacing:.10em}.inquiry-footer .btn{width:100%}.inquiry-choice{flex:1 1 auto;justify-content:center}}
+
+    .inquiry-form[aria-busy="true"] .inquiry-fields{opacity:.7}.inquiry-footer .btn:disabled{cursor:wait;opacity:.65;transform:none;box-shadow:none}.inquiry-status.is-error{background:var(--terracotta-soft);border-color:var(--line-strong)}
+    .inquiry-success{width:min(480px,calc(100% - 32px));max-width:none;max-height:calc(100dvh - 40px);margin:auto;padding:36px;border:1px solid var(--line);border-radius:26px;background:var(--cream);color:var(--charcoal);box-shadow:0 24px 80px rgba(var(--charcoal-rgb),.25);text-align:center}
+    .inquiry-success::backdrop{background:rgba(var(--charcoal-rgb),.70);backdrop-filter:blur(7px)}.inquiry-success-icon{display:grid;place-items:center;width:68px;height:68px;margin:0 auto 22px;border-radius:22px;background:var(--sage);color:var(--charcoal);font-size:30px}
+    .inquiry-success h2{margin:0;font-size:clamp(22px,4.8vw,28px);line-height:1.6;font-weight:850;color:var(--plum)}.inquiry-success p{margin:14px 0 26px;font-size:14px;line-height:1.9;color:var(--muted)}.inquiry-success .btn{width:100%}
+    @media(max-width:600px){.inquiry-success{padding:28px 22px;border-radius:22px}}
   </style>
 </head>
 <body>
@@ -279,10 +285,12 @@
               <span class="contact-form-icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></span>
               <h3 id="requirements-heading" class="contact-option-title">Google 需求表單</h3>
               <p class="contact-option-copy">也可以透過原有的 Google 表單，留下你的合作需求與專案想法。</p>
-              <a class="btn btn-outline" href="https://docs.google.com/forms/d/e/1FAIpQLSdua1INrs2xExCkZ9dNJ5lCqHZ9d7_djnaq6iHT0LBaOKQl3w/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" aria-label="填寫需求表單（另開 Google 表單）">填寫需求表單 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+              <a class="btn btn-outline" href="https://docs.google.com/forms/d/e/1FAIpQLSc9lAEm8sdbiYJ1TlZa5uShSTBFm8ZBCFtTgdsfeTnjfYXhgg/viewform" target="_blank" rel="noopener noreferrer" aria-label="填寫需求表單（另開 Google 表單）">填寫需求表單 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
             </div>
           </div>
-          <form id="inquiryForm" class="inquiry-form reveal" action="mailto:v0705w@gmail.com" method="post" enctype="text/plain" aria-labelledby="inquiry-heading" aria-describedby="inquiry-delivery-note">
+          <form id="inquiryForm" class="inquiry-form reveal" action="https://docs.google.com/forms/d/e/1FAIpQLSc9lAEm8sdbiYJ1TlZa5uShSTBFm8ZBCFtTgdsfeTnjfYXhgg/formResponse" method="post" target="googleFormSubmissionFrame" aria-labelledby="inquiry-heading" aria-describedby="inquiry-delivery-note">
+            <input id="inquiryRequirementValue" type="hidden" name="entry.1610329698">
+            <input id="inquiryContactTimeValue" type="hidden" name="entry.1091995575">
             <div class="inquiry-header">
               <span class="eyebrow">LET'S START A CONVERSATION</span>
               <h3 id="inquiry-heading" class="contact-option-title">聯絡我們</h3>
@@ -291,28 +299,28 @@
             <div class="inquiry-fields">
               <div class="inquiry-field">
                 <label for="inquiryName">您的姓名／稱呼 <span>必填</span></label>
-                <input id="inquiryName" name="name" type="text" placeholder="請輸入姓名或稱呼" autocomplete="name" maxlength="80" pattern=".*\S.*" required>
+                <input id="inquiryName" name="entry.588998168" type="text" placeholder="請輸入姓名或稱呼" autocomplete="name" maxlength="80" pattern=".*\S.*" required>
               </div>
               <div class="inquiry-field">
                 <label for="inquiryEmail">聯絡電子信箱 <span>必填</span></label>
-                <input id="inquiryEmail" name="email" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" maxlength="254" required>
+                <input id="inquiryEmail" name="entry.476214014" type="email" placeholder="name@example.com" autocomplete="email" inputmode="email" maxlength="254" required>
               </div>
               <fieldset class="inquiry-needs inquiry-full" aria-describedby="inquiry-needs-help">
                 <legend>您的需求 <span>必填</span></legend>
                 <p id="inquiry-needs-help" class="inquiry-help">可複選，請至少勾選一項。</p>
                 <div class="inquiry-choices">
-                  <label class="inquiry-choice"><input type="checkbox" name="needs" value="企業內訓"><span>企業內訓</span></label>
-                  <label class="inquiry-choice"><input type="checkbox" name="needs" value="資料科學專案"><span>資料科學專案</span></label>
-                  <label class="inquiry-choice"><input type="checkbox" name="needs" value="系統建置"><span>系統建置</span></label>
+                  <label class="inquiry-choice"><input type="checkbox" name="requirementChoices" value="企業內訓"><span>企業內訓</span></label>
+                  <label class="inquiry-choice"><input type="checkbox" name="requirementChoices" value="資料科學專案"><span>資料科學專案</span></label>
+                  <label class="inquiry-choice"><input type="checkbox" name="requirementChoices" value="系統建置"><span>系統建置</span></label>
                 </div>
               </fieldset>
               <div class="inquiry-field inquiry-full">
                 <label for="inquiryDescription">需求簡介 <span>必填</span></label>
-                <textarea id="inquiryDescription" name="description" rows="6" placeholder="請詳細說明你的需求、希望達成的目標、預計時程，或其他想讓我們了解的資訊。" maxlength="4000" required></textarea>
+                <textarea id="inquiryDescription" name="entry.1646642689" rows="6" placeholder="請詳細說明你的需求、希望達成的目標、預計時程，或其他想讓我們了解的資訊。" maxlength="4000" required></textarea>
               </div>
               <div class="inquiry-field inquiry-full">
                 <label for="inquiryContactTime">適合聯絡的時間 <span>必填</span></label>
-                <select id="inquiryContactTime" name="contactTime" required aria-describedby="inquiry-time-help">
+                <select id="inquiryContactTime" name="contactTimeChoice" required aria-describedby="inquiry-time-help">
                   <option value="時間皆可">時間皆可</option>
                   <option value="平日上午 09:00–12:00">平日上午 09:00–12:00</option>
                   <option value="平日下午 13:00–18:00">平日下午 13:00–18:00</option>
@@ -328,12 +336,13 @@
               </div>
             </div>
             <div class="inquiry-footer">
-              <p id="inquiry-delivery-note" class="inquiry-help">填妥後會開啟你的郵件程式。請確認草稿內容，並自行寄出至 v0705w@gmail.com。</p>
-              <button class="btn btn-primary" type="submit"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 開啟郵件草稿</button>
+              <p id="inquiry-delivery-note" class="inquiry-help">送出後會在背景傳送資料至 Google 表單，並留在目前頁面。</p>
+              <button id="inquirySubmit" class="btn btn-primary" type="submit" disabled><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> 送出需求</button>
               <p id="inquiryStatus" class="inquiry-status" role="status" aria-live="polite" hidden></p>
-              <noscript><p class="inquiry-help">你也可以直接寄信至 <a href="mailto:v0705w@gmail.com">v0705w@gmail.com</a>，或使用左側的 Google 需求表單。</p></noscript>
+              <noscript><p class="inquiry-help">請啟用 JavaScript 以在本頁送出，或<a href="https://docs.google.com/forms/d/e/1FAIpQLSc9lAEm8sdbiYJ1TlZa5uShSTBFm8ZBCFtTgdsfeTnjfYXhgg/viewform" target="_blank" rel="noopener noreferrer">另開 Google 需求表單</a>。</p></noscript>
             </div>
           </form>
+          <iframe id="googleFormSubmissionFrame" name="googleFormSubmissionFrame" title="背景表單傳送" hidden></iframe>
         </div>
         <div class="contact-panel reveal">
           <div class="relative z-10">
@@ -358,6 +367,12 @@
       </div>
     </div>
     <img id="photoViewerImage" class="photo-viewer-image" alt="" decoding="async">
+  </dialog>
+  <dialog id="inquirySuccess" class="inquiry-success" aria-labelledby="inquirySuccessTitle" aria-describedby="inquirySuccessDescription">
+    <div class="inquiry-success-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></div>
+    <h2 id="inquirySuccessTitle">需求已送出，我們將盡快與您聯絡！</h2>
+    <p id="inquirySuccessDescription">謝謝你分享合作想法，歡迎繼續瀏覽我們的作品。</p>
+    <button id="inquirySuccessClose" class="btn btn-primary" type="button" autofocus>好的，繼續瀏覽</button>
   </dialog>
   <script>
     'use strict';
@@ -408,8 +423,20 @@
     });
 
 
-    const inquiryForm=document.getElementById('inquiryForm'),inquiryStatus=document.getElementById('inquiryStatus');
-    const inquiryNeeds=[...inquiryForm.querySelectorAll('input[name="needs"]')],inquiryDescription=document.getElementById('inquiryDescription');
+
+    // Verified from FB_PUBLIC_LOAD_DATA_: use item[4][0][0], not the question block item[0].
+    const GOOGLE_FORM_ACTION='https://docs.google.com/forms/d/e/1FAIpQLSc9lAEm8sdbiYJ1TlZa5uShSTBFm8ZBCFtTgdsfeTnjfYXhgg/formResponse';
+    const FORM_FIELDS=Object.freeze({
+      name:'entry.588998168',
+      email:'entry.476214014',
+      requirement:'entry.1610329698',
+      description:'entry.1646642689',
+      contactTime:'entry.1091995575'
+    });
+    const inquiryForm=document.getElementById('inquiryForm'),inquiryStatus=document.getElementById('inquiryStatus'),inquirySubmit=document.getElementById('inquirySubmit');
+    const inquiryNeeds=[...inquiryForm.querySelectorAll('input[name="requirementChoices"]')],inquiryDescription=document.getElementById('inquiryDescription');
+    const inquirySuccess=document.getElementById('inquirySuccess'),inquirySuccessClose=document.getElementById('inquirySuccessClose');
+    let inquirySending=false,inquiryPriorOverflow='';
     function updateInquiryValidity(){
       inquiryNeeds[0].setCustomValidity(inquiryNeeds.some(input=>input.checked)?'':'請至少選擇一項需求。');
       inquiryDescription.setCustomValidity(inquiryDescription.value.trim()?'':'請填寫需求簡介。');
@@ -417,24 +444,83 @@
     inquiryNeeds.forEach(input=>input.addEventListener('change',updateInquiryValidity));
     inquiryDescription.addEventListener('input',updateInquiryValidity);
     updateInquiryValidity();
-    function createInquiryDraft(data){
-      const name=String(data.get('name')||'').trim().replace(/[\r\n]+/g,' ');
-      const email=String(data.get('email')||'').trim();
-      const needs=data.getAll('needs').join('、');
-      const description=String(data.get('description')||'').trim();
-      const time=String(data.get('contactTime')||'時間皆可');
-      const notes=String(data.get('contactNotes')||'').trim()||'無';
-      const subject='合作需求｜'+needs+'｜'+name;
-      const body=['您好，我想與您討論以下合作需求：','','姓名／稱呼：'+name,'聯絡電子信箱：'+email,'您的需求：'+needs,'適合聯絡的時間（台灣時間 UTC+8）：'+time,'聯絡時間補充：'+notes,'','需求簡介：',description].join('\r\n');
-      return {href:'mailto:v0705w@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),subject,body};
+    inquirySubmit.disabled=false;
+    function createGoogleFormPayload(data){
+      const contactTime=String(data.get('contactTimeChoice')||'時間皆可');
+      const contactNotes=String(data.get('contactNotes')||'').trim();
+      const values={
+        name:String(data.get(FORM_FIELDS.name)||'').trim(),
+        email:String(data.get(FORM_FIELDS.email)||'').trim(),
+        requirement:data.getAll('requirementChoices').join('、'),
+        description:String(data.get(FORM_FIELDS.description)||'').trim(),
+        contactTime:contactTime+'（台灣時間 UTC+8）'+(contactNotes?'；補充：'+contactNotes:'')
+      };
+      const payload=new URLSearchParams();
+      Object.keys(FORM_FIELDS).forEach(key=>payload.set(FORM_FIELDS[key],values[key]));
+      return payload;
     }
-    inquiryForm.addEventListener('submit',event=>{
-      event.preventDefault();updateInquiryValidity();
+    async function postGoogleForm(payload,signal,request=fetch){
+      const response=await request(GOOGLE_FORM_ACTION,{
+        method:'POST',
+        mode:'no-cors',
+        credentials:'omit',
+        body:payload,
+        signal
+      });
+      // Google Forms does not expose cross-origin receipt details.
+      // An opaque response confirms transport completion, not storage of the response.
+      if(response.type!=='opaque'&&!response.ok)throw new Error('Google Forms request failed');
+    }
+    function showInquiryStatus(message,isError=false){
+      inquiryStatus.hidden=false;inquiryStatus.classList.toggle('is-error',isError);inquiryStatus.textContent=message;
+    }
+    function showInquiryConfirmation(){
+      if(typeof inquirySuccess.showModal==='function'){
+        inquiryPriorOverflow=document.body.style.overflow;
+        inquirySuccess.showModal();document.body.style.overflow='hidden';
+      }else{
+        showInquiryStatus('需求已送出，我們將盡快與您聯絡！');
+      }
+    }
+    inquirySuccessClose.addEventListener('click',()=>inquirySuccess.close());
+    inquirySuccess.addEventListener('click',event=>{
+      if(event.target!==inquirySuccess)return;
+      const rect=inquirySuccess.getBoundingClientRect();
+      if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)inquirySuccess.close();
+    });
+    inquirySuccess.addEventListener('close',()=>{
+      document.body.style.overflow=inquiryPriorOverflow;
+      inquirySubmit.focus({preventScroll:true});
+    });
+    inquiryForm.addEventListener('submit',async event=>{
+      event.preventDefault();
+      if(inquirySending)return;
+      updateInquiryValidity();
       if(!inquiryForm.reportValidity())return;
-      const draft=createInquiryDraft(new FormData(inquiryForm));
-      inquiryStatus.hidden=false;
-      inquiryStatus.textContent='已整理成郵件草稿，請在郵件程式中確認內容並寄出。若未開啟郵件程式，可直接寄信至 v0705w@gmail.com，或使用 Google 需求表單。';
-      window.location.href=draft.href;
+      if(navigator.onLine===false){showInquiryStatus('目前沒有網路連線，請連線後再送出。填寫內容已保留。',true);return;}
+      const payload=createGoogleFormPayload(new FormData(inquiryForm));
+      document.getElementById('inquiryRequirementValue').value=payload.get(FORM_FIELDS.requirement);
+      document.getElementById('inquiryContactTimeValue').value=payload.get(FORM_FIELDS.contactTime);
+      const controller=new AbortController();
+      const timer=window.setTimeout(()=>controller.abort(),20000);
+      const buttonContent=inquirySubmit.innerHTML;
+      inquirySending=true;inquirySubmit.disabled=true;inquiryForm.setAttribute('aria-busy','true');
+      inquirySubmit.innerHTML='<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> 送出中…';
+      showInquiryStatus('正在背景傳送，請稍候…');
+      try{
+        await postGoogleForm(payload,controller.signal);
+        showInquiryStatus('背景傳送已完成。');
+        showInquiryConfirmation();
+        // Keep the entered values: a cross-origin response cannot verify Google storage.
+      }catch(error){
+        const message=error.name==='AbortError'
+          ?'連線逾時，尚無法確認送出結果。填寫內容已保留，請稍後確認或使用 Google 需求表單。'
+          :'暫時無法完成傳送，請檢查網路後重試，或使用 Google 需求表單。填寫內容已保留。';
+        showInquiryStatus(message,true);
+      }finally{
+        window.clearTimeout(timer);inquirySending=false;inquirySubmit.disabled=false;
+        inquirySubmit.innerHTML=buttonContent;inquiryForm.removeAttribute('aria-busy');
+      }
     });
 
     document.getElementById('year').textContent=new Date().getFullYear();
